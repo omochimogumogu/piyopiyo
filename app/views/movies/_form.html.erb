@@ -19,7 +19,16 @@
     <%= f.label :director %><br>
     <%= f.text_field :director %>
   </div>
+  <div class="field">
+    <%= f.label :rate %><br>
+    <%#= f.text_field :rate %>
+    <%= select_tag "movie[rate]", options_for_select([ "1", "2", '3',"4","5" ], @movie.rate).html_safe %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<pre>
+  <%= @movie.attributes %>
+</pre>

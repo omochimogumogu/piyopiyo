@@ -4,7 +4,8 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.all.order(created_at: :desc)
+    #@movies = Movie.all.order({:created_at => :desc})◀︎ちゃんと書くとこうなる（上は省略形）
   end
 
   # GET /movies/1
@@ -19,16 +20,30 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    pp [:hohoghoe, params]
+    @movie = Movie.find(params[:id])
   end
 
   # POST /movies
   # POST /movies.json
   def create
+    pp '======='
+    pp params[:movie]
+    pp '======='
+
+    array = ['gokudou','miyazaki', nil, 'nakamura']
+    p array[0]
+
+    hash = {title: 'gokudou', director: 'miyazaki'}
+    p hash[:title] #-> gokudou
+    p hash[:director] #-> miyazaki
+
+
     @movie = Movie.new(movie_params)
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.html { redirect_to @movie, notice: 'Movie was successfully recorded.' }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }
@@ -69,6 +84,8 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :director)
+      params.require(:movie).permit(:title, :director, :rate)
+      #movieに関するデータで、なおかつpermit()の中のデータだけをparamsとして使います
+      #これをstrong paramaterといいます
     end
 end
