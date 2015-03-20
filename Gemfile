@@ -46,3 +46,15 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+#https://github.com/rspec/rspec-rails
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
+#https://github.com/jnicklas/capybara#setup
+group :test do
+  gem 'capybara'
+  gem "poltergeist"
+  gem 'turnip'
+end

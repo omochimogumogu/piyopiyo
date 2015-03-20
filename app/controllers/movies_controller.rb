@@ -4,8 +4,14 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all.order(created_at: :desc)
-    #@movies = Movie.all.order({:created_at => :desc})◀︎ちゃんと書くとこうなる（上は省略形）
+    keyword = params[:search]
+    if keyword.present?
+      @movies = Movie.where(['title LIKE ?', "%#{keyword}%"])
+    else
+      @movies = Movie.all
+      #@movies = Movie.all.order({:created_at => :desc})◀︎ちゃんと書くとこうなる（上は省略形）
+    end
+    @movies = @movies.order(created_at: :desc)
   end
 
   # GET /movies/1
@@ -76,6 +82,10 @@ class MoviesController < ApplicationController
     end
   end
 
+  #def search
+    #@movies=Movie.where("title like ?","%" + "トトロ" + "%")
+  #end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
@@ -88,4 +98,5 @@ class MoviesController < ApplicationController
       #movieに関するデータで、なおかつpermit()の中のデータだけをparamsとして使います
       #これをstrong paramaterといいます
     end
+
 end
