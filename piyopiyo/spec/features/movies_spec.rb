@@ -22,7 +22,7 @@ feature 'ムービーが見れる', js: true do
     #save_and_open_screenshot
   end
 
-　scenario '単語の検索ができる'do
+  scenario '単語の検索ができる'do
     visit '/'
     fill_in 'search', with: 'テスト'
     find(:xpath, '/html/body/div[2]/div/div[1]/form/p/input[2]').click
