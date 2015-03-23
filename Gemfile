@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
 gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
 gem 'twitter-bootstrap-rails' # Bootstrapの本体
@@ -53,6 +54,9 @@ gem 'puma'
 #https://github.com/rspec/rspec-rails
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+
+  # http://techracho.bpsinc.jp/hachi8833/2014_05_28/17557
+  gem 'database_cleaner'
 end
 
 #https://github.com/jnicklas/capybara#setup
@@ -62,5 +66,7 @@ group :test do
 
   gem "poltergeist"
   gem 'turnip'
+
+  gem 'factory_girl_rails'
 end
 
