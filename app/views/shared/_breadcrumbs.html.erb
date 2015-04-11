@@ -1,0 +1,10 @@
+<% if @breadcrumbs.present? %>
+<ol class="breadcrumb" style="margin-top: -15px;">
+	<% @breadcrumbs.each_with_index do |breadcrumb, i| %>
+		<li class="<%= i == @breadcrumbs.size - 1 ? 'active' : '' %>">
+			<%= breadcrumb[:path].nil? ? breadcrumb[:title] : link_to(breadcrumb[:title], breadcrumb[:path]) %>
+		</li>
+	<% end %>
+</ol>
+
+<% end %>

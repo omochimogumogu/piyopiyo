@@ -46,7 +46,8 @@ feature 'ムービーが見れる', js: true do
 
     click_link('Edit')
     # 動画編集ページへ遷移
-
+    save_and_open_screenshot
+    
     fill_in 'movie[title]', with: 'マトリックヌ'
     fill_in 'movie[director]', with: 'ウォシャウスキー姉妹'
     select '3', from: 'movie[rate]'
@@ -54,12 +55,12 @@ feature 'ムービーが見れる', js: true do
     click_link_or_button('Update Movie')
     # 動画詳細ページへ遷移
 
-    # save_and_open_screenshot
+    save_and_open_screenshot
 
     click_link('Back')
     # 動画一覧ページへ遷移
 
-    # save_and_open_screenshot
+    save_and_open_screenshot
   end
 
 end

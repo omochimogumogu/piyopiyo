@@ -1,9 +1,19 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
+  before_action do
+    @breadcrumbs = []
+  end
+
+  before_action only: [:show, :new, :edit] do
+    @breadcrumbs << {title: "index", path: movies_path}
+  end
+
   # GET /movies
   # GET /movies.json
   def index
+    @breadcrumbs << {title: "index"}
+
     keyword = params[:search]
     if keyword.present?
       @movies = Movie.where(['title LIKE ?', "%#{keyword}%"])
@@ -17,17 +27,20 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @breadcrumbs << {title: @movie.title}
   end
 
   # GET /movies/new
   def new
     @movie = Movie.new
+    @breadcrumbs << {title: "new"}
   end
 
   # GET /movies/1/edit
   def edit
     pp [:hohoghoe, params]
     @movie = Movie.find(params[:id])
+    @breadcrumbs << {title: "edit"}
   end
 
   # POST /movies
@@ -94,7 +107,7 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :director, :rate)
+      params.require(:movie).permit(:title, :original_title, :director, :rate)
       #movieに関するデータで、なおかつpermit()の中のデータだけをparamsとして使います
       #これをstrong paramaterといいます
     end
