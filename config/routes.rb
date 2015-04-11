@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: redirect('/movies')
+  devise_for :users
+  root to: 'welcome#index'
   resources :movies
 
 
